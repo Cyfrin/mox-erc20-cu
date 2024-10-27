@@ -5,7 +5,7 @@ from hypothesis.stateful import (
     invariant,
 )
 from hypothesis import assume, settings, strategies as st
-from moccasin.strategies import strategy
+from boa.test.strategies import strategy
 from script.deploy import deploy
 from boa.util.abi import Address
 import boa
@@ -26,7 +26,6 @@ class TokenStateFuzzer(RuleBasedStateMachine):
             self.minters = [boa.env.generate_address() for _ in range(MINTERS_SIZE)]
 
     @rule(
-        # address=strategy("address"),
         amount=strategy("uint256"),
         minter_seed=st.integers(min_value=0, max_value=MINTERS_SIZE - 1),
     )

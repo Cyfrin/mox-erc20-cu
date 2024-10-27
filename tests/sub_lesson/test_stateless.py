@@ -1,6 +1,6 @@
 from contracts.sub_lesson import stateless_fuzz_solvable
 from hypothesis import given, example, settings, HealthCheck, strategies as st
-from moccasin.strategies import strategy
+from boa.test.strategies import strategy
 import pytest
 
 

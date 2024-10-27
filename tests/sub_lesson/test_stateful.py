@@ -1,7 +1,7 @@
 from hypothesis.stateful import RuleBasedStateMachine, rule
 from hypothesis import settings
 from contracts.sub_lesson import stateful_fuzz_solvable
-from moccasin.strategies import strategy
+from boa.test.strategies import strategy
 
 
 class StatefulFuzzer(RuleBasedStateMachine):
@@ -18,7 +18,6 @@ class StatefulFuzzer(RuleBasedStateMachine):
     # ------------------------------------------------------------------
     @rule(input_number=strategy("uint256"))
     def input_number_returns_itself(self, input_number):
-        print(input_number)
         result = int(self.contract.always_returns_input_number(input_number))
         assert result == input_number, f"Expected {input_number}, got {result}"
 
