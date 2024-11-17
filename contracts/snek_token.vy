@@ -17,6 +17,8 @@ from ethereum.ercs import IERC20Detailed
 implements: IERC20Detailed
 from snekmate.auth import ownable as ow
 
+# from pcaversaccio.snekmate.src.snekmate.auth import ownable as ow
+
 initializes: ow
 from snekmate.tokens import erc20
 
@@ -33,9 +35,7 @@ SYMBOL: constant(String[5]) = "SNEK"
 DECIMALS: constant(uint8) = 18
 EIP712_VERSOIN: constant(String[20]) = "1"
 
-# Storage
-# Private... can we access this?
-initialSupply: uint256
+# Storage - none!
 
 # ------------------------------------------------------------------
 #                            FUNCTIONS
@@ -45,7 +45,6 @@ def __init__(initial_supply: uint256):
     ow.__init__()
     erc20.__init__(NAME, SYMBOL, DECIMALS, NAME, EIP712_VERSOIN)
     erc20._mint(msg.sender, initial_supply)
-    self.initialSupply = erc20.totalSupply
 
 
 # This is a bug! Remove it (but our stateful tests should catch it!)
