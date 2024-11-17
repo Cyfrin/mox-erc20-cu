@@ -48,6 +48,8 @@ mox compile
 
 ## Test
 
+(These will fail intentionally!)
+
 ```bash
 mox test
 ```
@@ -64,5 +66,5 @@ uv run ruff check . --fix
 ## Vyper 
 
 ```
-uv run mamushi src
+uv run mamushi contracts/
 ```

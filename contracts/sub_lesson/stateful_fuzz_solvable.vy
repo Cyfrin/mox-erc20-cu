@@ -1,10 +1,11 @@
+# pragma version 0.4.0
 """
-@ pragma version 0.4.0
-@ title always_return_input_two
-@ license MIT
-@ notice INVARIANT: always_returns_input_number should always return the input number
+@title always_return_input_two
+@license MIT
+@notice INVARIANT: always_returns_input_number should always return the input number
 """
 some_number: public(uint256)
+
 
 @external
 def always_returns_input_number(input_number: uint256) -> uint256:
@@ -15,6 +16,7 @@ def always_returns_input_number(input_number: uint256) -> uint256:
         return 0
     return input_number
 
-@external 
+
+@external
 def change_number(new_number: uint256):
     self.some_number = new_number

@@ -1,32 +1,45 @@
+# pragma version 0.4.0
 """
-@ pragma version 0.4.0
-@ license MIT
-@ title snek_token
+@license MIT
+@title snek_token
+@author You!
+@notice This is my ERC20 token!
 """
-# @dev We import and implement the `IERC20` interface,
-# which is a built-in interface of the Vyper compiler.
+
+# ------------------------------------------------------------------
+#                             IMPORTS
+# ------------------------------------------------------------------
 from ethereum.ercs import IERC20
+
 implements: IERC20
-
 from ethereum.ercs import IERC20Detailed
+
 implements: IERC20Detailed
-
-# @dev We import and initialise the `ownable` module.
 from snekmate.auth import ownable as ow
-initializes: ow
 
-# @dev We import and initialise the `erc20` module.
+initializes: ow
 from snekmate.tokens import erc20
+
 initializes: erc20[ownable := ow]
 
-# Private... can we access this?
-initialSupply: uint256
+exports: erc20.__interface__
 
+# ------------------------------------------------------------------
+#                         STATE VARIABLES
+# ------------------------------------------------------------------
+# Constants & Immutables
 NAME: constant(String[25]) = "snek_token"
 SYMBOL: constant(String[5]) = "SNEK"
 DECIMALS: constant(uint8) = 18
 EIP712_VERSOIN: constant(String[20]) = "1"
 
+# Storage
+# Private... can we access this?
+initialSupply: uint256
+
+# ------------------------------------------------------------------
+#                            FUNCTIONS
+# ------------------------------------------------------------------
 @deploy
 def __init__(initial_supply: uint256):
     ow.__init__()
@@ -34,13 +47,12 @@ def __init__(initial_supply: uint256):
     erc20._mint(msg.sender, initial_supply)
     self.initialSupply = erc20.totalSupply
 
+
 # This is a bug! Remove it (but our stateful tests should catch it!)
-@external 
+@external
 def super_mint():
     # We forget to update the total supply!
     # self.totalSupply += amount
     amount: uint256 = as_wei_value(100, "ether")
     erc20.balanceOf[msg.sender] = erc20.balanceOf[msg.sender] + amount
     log IERC20.Transfer(empty(address), msg.sender, amount)
-
-exports: erc20.__interface__

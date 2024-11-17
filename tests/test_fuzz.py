@@ -1,15 +1,17 @@
+import boa
+from boa.test.strategies import strategy
+from boa.util.abi import Address
+from eth.constants import UINT_256_MAX, ZERO_ADDRESS
+from hypothesis import assume, settings
+from hypothesis import strategies as st
 from hypothesis.stateful import (
     RuleBasedStateMachine,
-    rule,
     initialize,
     invariant,
+    rule,
 )
-from hypothesis import assume, settings, strategies as st
-from boa.test.strategies import strategy
+
 from script.deploy import deploy
-from boa.util.abi import Address
-import boa
-from eth.constants import ZERO_ADDRESS, UINT_256_MAX
 
 MINTERS_SIZE = 10
 
