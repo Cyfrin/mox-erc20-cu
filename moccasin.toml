@@ -1,0 +1,4 @@
+[networks.zksync]
+url = "http://127.0.0.1:8011"
+is_zksync = true
+prompt_live = false

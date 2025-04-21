@@ -1,4 +1,4 @@
-# pragma version 0.4.0
+# pragma version 0.4.1
 """
 @title always_return_input
 @license MIT
